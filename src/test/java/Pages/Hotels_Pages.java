@@ -19,6 +19,7 @@ import Web.WebCommands;
 
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Hotels_Pages extends WebCommands {
@@ -78,6 +79,34 @@ public class Hotels_Pages extends WebCommands {
 
 
 	By changesdatesenableloc = By.xpath("//*[@id='main']/div[2]/div/div[2]/div[2]/section[2]/div/ul/li/button");
+
+
+	By Websitelocator = By.id("ftr-feedback-main");
+	By submitbutton = By.xpath("//button[text()='Submit']");
+	By displayeheadermsg = By.xpath("//p[text()='Please fill in the required information highlighted below.']");
+	By spanreddot = By.id("required_box_page_rating");
+
+	By whybooking = By.xpath("//*[@id='app-layer-base']/div[1]/div[2]/div[1]/div[2]/div");
+	By freecancelationlocator = By.xpath("//*[text()='Free cancellation']");
+	By onmostrecent = By.xpath("//*[@id='editorial-2']/div/div/div/p[2]");
+	By Ourpricemessagelocator = By.xpath("//span[text()='Our price guarantee']");
+	By findoutmorelink = By.xpath("//*[@id='editorial-3']/div/div/div/p[2]/a");
+	By Ourpricgurantee = By.xpath("//h3[text()='Our price guarantee']");
+	By priceguarantee = By.xpath("(//*[contains(text(),'Price Guarantee')])[1]");
+	By tennightstandlocator = By.xpath("//*[@id='main']/div[2]/div/section[1]/ul/li[3]/a");
+	By tennightyoustay = By.xpath("//*[@id='editorial-4']/div/div/div/p[2]/a");
+	By displayerror = By.xpath("//h1[contains(text(),'Instant saving')]");
+
+
+	By selectstar = By.xpath("//*[@id='required_box_page_rating']/div[1]/div[1]/label");
+	By Commentlocator = By.name("verbatim");
+	By returntoHotel = By.id("will-you-return");
+	By unlikelyselect = By.xpath("//*[text()='Highly likely']");
+	By firstno = By.xpath("(//*[text()='No'])[1]");
+	By secondno = By.xpath("(//*[text()='No'])[2]");
+	By clicksubmit = By.id("submit-button");
+	By feedbackTy = By.xpath("//*[text()='THANK YOU FOR YOUR FEEDBACK.']");
+
 
 	public void clickSearchTab() {
 		clickThis(searchTabLocator);
@@ -432,10 +461,8 @@ public class Hotels_Pages extends WebCommands {
 
 	}
 
-	public void SearchDest2()
-
-	{
-		type(Destinationtool,"Bora Bora");
+	public void SearchDest2() {
+		type(Destinationtool, "Bora Bora");
 		clickThis(Destinationtool);
 
 	}
@@ -480,20 +507,140 @@ public class Hotels_Pages extends WebCommands {
 		}
 
 	}
+
 	public void Clickonsearchtag() {
 		clickThis(Searchbutton);
 
 	}
 
-	public void verificationofchangedates(){
-		JavascriptExecutor js =(JavascriptExecutor) UseDriver.getDriver();
+	public void verificationofchangedates() {
+		JavascriptExecutor js = (JavascriptExecutor) UseDriver.getDriver();
 		js.executeScript("window.scrollTo(0,document.body.scrollHeight)");
 
-		WebElement changedateslocator =  waitUntillEleemtIsVisiable(UseDriver.getDriver(),120,changesdatesenableloc);
+		WebElement changedateslocator = waitUntillEleemtIsVisiable(UseDriver.getDriver(), 120, changesdatesenableloc);
+
+
+		Assert.assertTrue(changedateslocator.isDisplayed() && changedateslocator.isEnabled());
+	}
+
+
+	//Verify tickmark on Hotels page is displayed
+
+	public void clickWFlocator() {
+
+
+		clickThis(Websitelocator);
+
+	}
+
+	public void clicksubmitbutton() {
+
+		clickThis(submitbutton);
+	}
+
+	public void displayederror() {
+		String actualmsg = UseDriver.getDriver().findElement(displayeheadermsg).getText();
+		String expectedmsg = "Please fill in the required information highlighted below.";
+		Assert.assertEquals(actualmsg, expectedmsg);
+		Assert.assertTrue(UseDriver.getDriver().findElement(displayeheadermsg).isDisplayed());
+
+
+	}
+
+	public void reddotdisplayed() {
+
+		Assert.assertTrue(UseDriver.getDriver().findElement(spanreddot).isDisplayed());
+	}
+
+	public void getguarenteelink() {
+		clickThis(Ourpricgurantee);
+	}
+
+	public void displaymsg() {
+
+		Assert.assertTrue(UseDriver.getDriver().findElement(priceguarantee).isDisplayed());
+	}
+
+	public void goback() {
+		UseDriver.getDriver().navigate().back();
+	}
+
+	public void clickongetstandnight() {
+
+		clickThis(tennightstandlocator);
+	}
+
+	public void displayerror() {
+
+		Assert.assertTrue(UseDriver.getDriver().findElement(displayerror).isDisplayed());
+
+
+	}
+
+	public WebElement waituntilwhybooking(WebDriver driver, int waititme, By Locator) {
+
+		WebDriverWait wait = new WebDriverWait(driver, waititme);
+		WebElement element = wait.until(ExpectedConditions.visibilityOf(UseDriver
+				.getDriver().findElement(Locator)));
+
+		return element;
+
+
+	}
+
+	public void freecancellocator() {
+		Assert.assertTrue(UseDriver.getDriver().findElement(freecancelationlocator)
+				.isDisplayed() && UseDriver.getDriver().findElement(onmostrecent).isDisplayed());
+	}
+
+	public void ourpricelocator() {
+		Assert.assertTrue(UseDriver.getDriver().findElement(Ourpricemessagelocator).isDisplayed()
+				&& UseDriver.getDriver().findElement(findoutmorelink).isEnabled());
+
+	}
+
+	public void tennightstand() {
+		Assert.assertTrue(UseDriver.getDriver().findElement(tennightstandlocator).isDisplayed() &&
+				UseDriver.getDriver().findElement(tennightyoustay).isEnabled());
+	}
+
+
+	public void onestarrating() {
+		ArrayList<String> tabs = new ArrayList<>(UseDriver.getDriver().getWindowHandles());
+		UseDriver.getDriver().switchTo().window(tabs.get(1));
+		clickThis(selectstar);
+	}
+
+	public void leavecomment() {
+		type(Commentlocator, "Your website sucks, poor designing");
+
+	}
+
+	public void willyoureturn() {
+
+
+		//clickThis(returntoHotel);
+		//By likelyselect = By.xpath("//*[text()='Highly likely']");
+		WebElement verifyselect = UseDriver.getDriver().findElement(returntoHotel);
+		Select sel = new Select(verifyselect);
+		//sel.selectByVisibleText("Highly Likely");
+		sel.selectByValue("Highly Likely");
 
 
 
-		Assert.assertTrue(changedateslocator.isDisplayed()&&changedateslocator.isEnabled());
+	}
+
+	public void selectno() {
+		clickThis(firstno);
+	}
+	public void selectno2(){
+		clickThis(secondno);
+	}
+	public void clickonsubmit(){
+		clickThis(clicksubmit);
+	}
+	public void Thankyoudisplay(){
+		Assert.assertTrue(UseDriver.getDriver().findElement(feedbackTy).isDisplayed());
 	}
 
 }

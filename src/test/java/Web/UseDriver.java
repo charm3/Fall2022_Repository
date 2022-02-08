@@ -16,8 +16,9 @@ public class UseDriver {
     public static void openUrl(String url) {
         System.setProperty("webdriver.chrome.driver" , "Drivers/chromedriver.exe");
         driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
         driver.get("https://www.hotels.com/");
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         // Misc.sleep(2);
     }
 
