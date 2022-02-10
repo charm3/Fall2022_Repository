@@ -82,7 +82,7 @@ public class Hotels_Pages extends WebCommands {
 
 
 
-	//(SPRINT PLANNING 2 ) class1 git
+	//(SPRINT PLANNING 2 ) class1 git assignee
 
 
 	By Websitelocator = By.id("ftr-feedback-main");
