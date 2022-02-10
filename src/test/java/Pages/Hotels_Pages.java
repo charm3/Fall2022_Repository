@@ -81,6 +81,10 @@ public class Hotels_Pages extends WebCommands {
 	By changesdatesenableloc = By.xpath("//*[@id='main']/div[2]/div/div[2]/div[2]/section[2]/div/ul/li/button");
 
 
+
+	//(SPRINT PLANNING 2)
+
+
 	By Websitelocator = By.id("ftr-feedback-main");
 	By submitbutton = By.xpath("//button[text()='Submit']");
 	By displayeheadermsg = By.xpath("//p[text()='Please fill in the required information highlighted below.']");
